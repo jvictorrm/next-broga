@@ -4,39 +4,21 @@ import FaceHappyIcon from "@/components//Icons/FaceHappyIcon";
 import GamepadIcon from "@/components/Icons/GamepadIcon";
 import HomeIcon from "@/components/Icons/HomeIcon";
 import RouteIcon from "@/components/Icons/RouteIcon";
-import cn from "@/utils/cn";
+import cn from "@/helpers/cn";
 import Image from "next/image";
+import NavBarList from "./NavBarList";
+import NavBarListItemLink from "./NavBarListItemLink";
+import { NavBarProps } from "./types";
 
-const NavBarList = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+const Navbar = ({ className, ...props }: NavBarProps) => {
   return (
-    <ul
+    <nav
       className={cn(
-        "my-4 border-t border-indigo-400/20 hover:border-indigo-400/40",
+        "flex h-screen flex-col gap-4 bg-slate-900 border-r border-indigo-400/20 hover:border-indigo-400/40 w-72 p-2 text-slate-300",
         className
       )}
+      {...props}
     >
-      {children}
-    </ul>
-  );
-};
-
-const NavBarListItem = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <li className="my-2 rounded-lg bg-transparent hover:bg-slate-800 hover:text-slate-100 p-2 cursor-pointer flex gap-2 items-center">
-      {children}
-    </li>
-  );
-};
-
-const Navbar = () => {
-  return (
-    <nav className="flex h-screen flex-col gap-4 bg-slate-900 border-r border-indigo-400/20 hover:border-indigo-400/40 w-72 p-2 text-slate-300">
       <div className="flex items-center justify-center">
         <Image
           src={LogoIcon}
@@ -45,23 +27,23 @@ const Navbar = () => {
         />
       </div>
       <NavBarList className="flex-grow">
-        <NavBarListItem>
+        <NavBarListItemLink href="/">
           <HomeIcon className="w-4 h-4" /> Home
-        </NavBarListItem>
-        <NavBarListItem>
+        </NavBarListItemLink>
+        <NavBarListItemLink href="/games">
           <GamepadIcon className="w-4 h-4" /> Games
-        </NavBarListItem>
-        <NavBarListItem>
+        </NavBarListItemLink>
+        <NavBarListItemLink href="/top-10">
           <AwardIcon className="w-4 h-4" /> Top 10
-        </NavBarListItem>
-        <NavBarListItem>
+        </NavBarListItemLink>
+        <NavBarListItemLink href="/walkthroughts">
           <RouteIcon className="w-4 h-4" /> Walkthroughts
-        </NavBarListItem>
+        </NavBarListItemLink>
       </NavBarList>
       <NavBarList>
-        <NavBarListItem>
+        <NavBarListItemLink href="/user">
           <FaceHappyIcon className="w-4 h-4" /> User
-        </NavBarListItem>
+        </NavBarListItemLink>
       </NavBarList>
     </nav>
   );

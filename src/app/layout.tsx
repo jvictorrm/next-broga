@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavBar/Navbar";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex gap-2">
+      <body className="flex">
         <Navbar />
 
         {children}
