@@ -14,10 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex">
+      <body className="flex gap-2 bg-slate-890 text-slate-300">
         <Navbar />
-
-        {children}
+        <div className="w-full">{children}</div>
       </body>
     </html>
   );

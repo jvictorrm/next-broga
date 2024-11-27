@@ -20,11 +20,7 @@ const Navbar = ({ className, ...props }: NavBarProps) => {
       {...props}
     >
       <div className="flex items-center justify-center">
-        <Image
-          src={LogoIcon}
-          alt="logo"
-          className="max-w-full w-28 h-28 p-2 "
-        />
+        <Image src={LogoIcon} alt="logo" className="max-w-full w-28 h-28 p-2" />
       </div>
       <NavBarList className="flex-grow">
         <NavBarListItemLink href="/">

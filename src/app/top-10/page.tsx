@@ -1,5 +1,5 @@
 const Top10 = () => {
-  return <div>Top10</div>;
+  return <h1>Top10</h1>;
 };
 
 export default Top10;

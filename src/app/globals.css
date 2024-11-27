@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-slate-890: 24 31 48;
+  }
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
