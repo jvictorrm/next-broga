@@ -14,7 +14,7 @@ const Navbar = ({ className, ...props }: NavBarProps) => {
   return (
     <nav
       className={cn(
-        "flex h-screen flex-col gap-4 bg-slate-900 border-r border-indigo-400/20 hover:border-indigo-400/40 w-72 p-2 text-slate-300",
+        "fixed top-0 left-0 flex h-screen flex-col gap-4 bg-slate-900 border-r border-indigo-400/20 hover:border-indigo-400/40 w-72 p-2 text-slate-300",
         className
       )}
       {...props}
