@@ -1,4 +1,4 @@
-import articles from "@/app/data/articles.json";
+import articles from "@/data/articles.json";
 import Image from "next/image";
 
 export default function Home() {
