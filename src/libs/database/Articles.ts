@@ -17,6 +17,11 @@ const Article = {
       skip,
     });
   },
+  count: async ({ where = {} } = {}) => {
+    return await prisma.article.count({
+      where,
+    });
+  },
 };
 
 export default Article;
