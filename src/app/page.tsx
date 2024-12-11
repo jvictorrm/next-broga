@@ -5,11 +5,15 @@ import Image from "next/image";
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { page?: string; limit?: string };
+  searchParams?: {
+    page?: string;
+    limit?: string;
+  };
 }) {
-  const currentPage = Number(searchParams?.page) || 1;
-  const limit = Number(searchParams?.limit) || 10;
-  const articles = await ArticleService.getHomeArticles(currentPage, limit);
+  const params = await searchParams;
+  const currentPage = Number(params?.page || "1");
+  const limitPage = Number(params?.limit || "10");
+  const articles = await ArticleService.getHomeArticles(currentPage, limitPage);
   const latestArticles = await ArticleService.getHomeLatestArticles();
 
   return (
