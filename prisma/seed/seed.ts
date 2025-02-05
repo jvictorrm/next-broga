@@ -48,6 +48,7 @@ async function truncateGamesAndGenres() {
     "DELETE FROM SQLITE_SEQUENCE WHERE name=$1;",
     "Genres"
   );
+  return;
 }
 
 async function seedArticles() {
