@@ -1,5 +1,7 @@
+import Hero from "@/components/Hero/Hero";
 import Pagination from "@/components/Pagination/Pagination";
 import ArticleService from "@/services/Articles";
+import GamesService from "@/services/Games";
 import Image from "next/image";
 
 export default async function Home({
@@ -15,14 +17,17 @@ export default async function Home({
   const limitPage = Number(params?.limit || "10");
   const articles = await ArticleService.getHomeArticles(currentPage, limitPage);
   const latestArticles = await ArticleService.getHomeLatestArticles();
+  const heroGames = await GamesService.getRandomGames(40);
 
   return (
     <>
-      <div className="w-full h-[35vh] bg-orange-400 flex-center">
-        <p>algo tals</p>
+      <div className="container mx-auto my-6 w-full h-[35vh] flex-center">
+        <Hero games={heroGames.data} />
       </div>
 
-      <div className="container mx-auto my-6">
+      <div className="container mx-auto my-10">
+        <h2 className="text-3xl my-6 underline">Latest Articles</h2>
+
         <div className="grid grid-cols-4 gap-4 h-[35vh]">
           {latestArticles.data.map((article) => (
             <div
@@ -46,7 +51,9 @@ export default async function Home({
         </div>
       </div>
 
-      <div className="container mx-auto my-6">
+      <div className="container mx-auto my-10">
+        <h3 className="text-2xl my-6 underline">Articles</h3>
+
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-8">
             <div className="flex gap-4 flex-col">
