@@ -31,6 +31,9 @@ const ArticleService = {
 
     return { data, metadata: { page, limit, offset, total, totalPages } };
   },
+  getArticleBySlug: async (slug: string) => {
+    return Article.getOne({ where: { slug } });
+  },
 };
 
 export default ArticleService;

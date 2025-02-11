@@ -46,7 +46,7 @@ const Hero = ({ games }: { games: any[] }) => {
       <div className="flex-center">
         <div className="flex-center flex-col">
           <Image
-            className="h-full w-full object-cover brightness-75 hover:brightness-100 w-[160px] h-auto"
+            className="object-cover brightness-75 hover:brightness-100 w-[160px] h-auto"
             src="/assets/images/nintendo-64-logo.svg"
             alt="Nintendo 64 logo"
             width={160}
