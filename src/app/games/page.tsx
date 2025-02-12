@@ -2,6 +2,7 @@ import Pagination from "@/components/Pagination/Pagination";
 import { getGameImage } from "@/helpers/games";
 import GamesService from "@/services/Games";
 import Image from "next/image";
+import Link from "next/link";
 
 const Games = async ({
   searchParams,
@@ -23,7 +24,8 @@ const Games = async ({
         <div className="grid grid-cols-4 gap-y-12 gap-x-4">
           {games.data.map((game) => {
             return (
-              <div
+              <Link
+                href={`/games/${game.slug}`}
                 key={game.id}
                 className="flex-center flex-col relative overflow-hidden transition duration-500 hover:scale-105 cursor-pointer"
               >
@@ -37,7 +39,7 @@ const Games = async ({
                   />
                 </div>
                 <p className="pt-2 pb-2 px-2 w-full">{game.title}</p>
-              </div>
+              </Link>
             );
           })}
         </div>

@@ -17,7 +17,7 @@ export const ScrollableGameList = ({
     <>
       {games.map((game) => (
         <Link
-          href={getGameImage(game.slug)}
+          href={`/games/${game.slug}`}
           key={game.id}
           className="h-32 w-auto"
         >
