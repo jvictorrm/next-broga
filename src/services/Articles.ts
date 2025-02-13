@@ -1,8 +1,7 @@
+import { sleep } from "@/helpers/promises";
 import Article from "@/libs/database/Articles";
 
 const HOME_LATEST_COUNT = 4;
-
-const sleep = () => new Promise((r) => setTimeout(r, Math.random() * 10000));
 
 const ArticleService = {
   getArticles: async (page = 1, limit = 10) => {
