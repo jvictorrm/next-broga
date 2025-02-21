@@ -1,4 +1,4 @@
-import { Article as ArticlePrisma, PrismaClient } from "@prisma/client";
+import { Article as ArticlesPrisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -9,7 +9,7 @@ const Article = {
   getOne: async ({
     where,
   }: {
-    where: Pick<ArticlePrisma, "id"> | Pick<ArticlePrisma, "slug">;
+    where: Pick<ArticlesPrisma, "id"> | Pick<ArticlesPrisma, "slug">;
   }) => {
     const record = await prisma.article.findUnique({ where });
     return record;
