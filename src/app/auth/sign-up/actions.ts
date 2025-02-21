@@ -1,6 +1,7 @@
 "use server";
 
 import UsersService from "@/services/Users";
+import { z } from "zod";
 
 export type SignUpError = {
   name?: string | undefined;
@@ -14,47 +15,38 @@ export type SignUpState = {
   errors: SignUpError;
 };
 
-const validateSignUpForm = (formData: FormData) => {
-  const errors: SignUpError = {
-    name: undefined,
-    email: undefined,
-    password: undefined,
-    passwordConfirmation: undefined,
-  };
+const getZodErrors = (error: unknown) => {
+  const isZodError = error instanceof z.ZodError;
+  if (!isZodError) return null;
 
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const passwordConfirmation = formData.get("passwordConfirmation") as string;
+  const { fieldErrors } = error.flatten();
+  const errors = Object.keys(fieldErrors).reduce((acc, key) => {
+    const message = fieldErrors[key]?.at(0);
+    return { ...acc, [key]: message };
+  }, {} as SignUpError);
+
+  return errors;
+};
+
+const validateSignUpForm = (formData: FormData) => {
+  const userSchema = z
+    .object({
+      name: z.string().min(3),
+      email: z.string().email(),
+      password: z.string().min(10),
+      passwordConfirmation: z.string().min(10),
+    })
+    .refine((data) => data.password === data.passwordConfirmation, {
+      message: "Passwords don't match",
+      path: ["passwordConfirmation"],
+    });
 
   try {
-    if (!name) {
-      errors.name = "Name is required";
-    }
-
-    if (!email) {
-      errors.email = "E-mail is required";
-    }
-
-    if (!email.includes("@")) {
-      errors.email = "E-mail is invalid";
-    }
-
-    if (password.length < 10) {
-      errors.password = "Password should be at least 10 characters";
-    }
-
-    if (!password || passwordConfirmation !== password) {
-      errors.passwordConfirmation = "Password confirmation is not the same";
-    }
-
-    const isValid = Object.values(errors || {}).every(
-      (value) => value === undefined
-    );
-
-    return { isValid, errors };
-  } catch (_) {
-    return { isValid: false, errors };
+    userSchema.parse(Object.fromEntries(formData));
+    return { isValid: true, errors: {} };
+  } catch (error: unknown) {
+    const zodErrors = getZodErrors(error);
+    return { isValid: false, errors: zodErrors || {} };
   }
 };
 
@@ -73,5 +65,5 @@ export const handleSignUpForm = async (prevState: any, formData: FormData) => {
 
   await UsersService.signUp(data);
 
-  return { ...prevState, isValid: true };
+  return { isValid: true, errors: {} };
 };
