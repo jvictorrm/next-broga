@@ -8,6 +8,13 @@ const Users = {
       data,
     });
   },
+  findByEmail: async (email: string) => {
+    return prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  },
 };
 
 export default Users;

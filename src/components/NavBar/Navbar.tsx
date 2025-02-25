@@ -10,7 +10,7 @@ import NavBarList from "./NavBarList";
 import NavBarListItemLink from "./NavBarListItemLink";
 import { NavBarProps } from "./types";
 
-const Navbar = ({ className, ...props }: NavBarProps) => {
+const Navbar = ({ className, user, ...props }: NavBarProps) => {
   return (
     <nav
       className={cn(
@@ -37,9 +37,15 @@ const Navbar = ({ className, ...props }: NavBarProps) => {
         </NavBarListItemLink>
       </NavBarList>
       <NavBarList>
-        <NavBarListItemLink href="/user">
-          <FaceHappyIcon className="w-4 h-4" /> User
-        </NavBarListItemLink>
+        {!user ? (
+          <NavBarListItemLink href="/auth/sign-in">
+            <FaceHappyIcon className="w-4 h-4" /> Log In
+          </NavBarListItemLink>
+        ) : (
+          <NavBarListItemLink href="/user">
+            <FaceHappyIcon className="w-4 h-4" /> {user.name}
+          </NavBarListItemLink>
+        )}
       </NavBarList>
     </nav>
   );
