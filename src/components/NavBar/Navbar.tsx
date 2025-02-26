@@ -1,12 +1,16 @@
+import { handleSignOutForm } from "@/app/auth/sign-out/actions";
 import LogoIcon from "@/assets/game-console-gamer-svgrepo-com.svg";
 import AwardIcon from "@/components//Icons/AwardIcon";
+import ExitIcon from "@/components//Icons/ExitIcon";
 import FaceHappyIcon from "@/components//Icons/FaceHappyIcon";
 import GamepadIcon from "@/components/Icons/GamepadIcon";
 import HomeIcon from "@/components/Icons/HomeIcon";
 import RouteIcon from "@/components/Icons/RouteIcon";
 import cn from "@/helpers/cn";
 import Image from "next/image";
+import FormButton from "../Forms/FormButton";
 import NavBarList from "./NavBarList";
+import NavBarListItem from "./NavBarListItem";
 import NavBarListItemLink from "./NavBarListItemLink";
 import { NavBarProps } from "./types";
 
@@ -36,17 +40,23 @@ const Navbar = ({ className, user, ...props }: NavBarProps) => {
           <RouteIcon className="w-4 h-4" /> Walkthroughts
         </NavBarListItemLink>
       </NavBarList>
-      <NavBarList>
-        {!user ? (
+      {!user ? (
+        <NavBarList>
           <NavBarListItemLink href="/auth/sign-in">
             <FaceHappyIcon className="w-4 h-4" /> Log In
           </NavBarListItemLink>
-        ) : (
+        </NavBarList>
+      ) : (
+        <NavBarList>
           <NavBarListItemLink href="/user">
             <FaceHappyIcon className="w-4 h-4" /> {user.name}
           </NavBarListItemLink>
-        )}
-      </NavBarList>
+          <NavBarListItem>
+            <ExitIcon className="w-4 h-4" />
+            <FormButton label="Log out" action={handleSignOutForm} />
+          </NavBarListItem>
+        </NavBarList>
+      )}
     </nav>
   );
 };
