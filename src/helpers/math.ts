@@ -6,14 +6,21 @@ export const getIntArray = (min: number, max: number) => {
   return result;
 };
 
+export const shuffleArray = (arr: any[]) => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  return arr;
+};
+
 export const getRandomIntArrayInRange = (
   min: number,
   max: number,
   count: number
 ) => {
-  return Array(max)
-    .fill(0)
-    .map((_, idx) => min + idx + 1)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, count);
+  const result = getIntArray(min, max);
+  const shuffledArray = shuffleArray(result);
+  return shuffledArray.slice(0, count);
 };

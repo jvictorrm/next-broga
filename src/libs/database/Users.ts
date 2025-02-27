@@ -1,9 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User as UserPrisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const Users = {
-  create: async (data: any) => {
+  create: async (data: Pick<UserPrisma, "name" | "email" | "password">) => {
     return prisma.user.create({
       data,
     });
