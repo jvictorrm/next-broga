@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SignUpForm from "./SignUpForm";
 
 const SignUpPage = () => {
@@ -7,6 +8,10 @@ const SignUpPage = () => {
         <div className="max-w-[600px] mx-auto border border-slate-800 rounded-lg p-8">
           <h1>Create your account</h1>
           <SignUpForm />
+
+          <div className="mt-8">
+            <Link href="/auth/sign-in">Already have an account? Sign in</Link>
+          </div>
         </div>
       </div>
     </div>

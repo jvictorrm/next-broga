@@ -1,11 +1,16 @@
-import { getGameImage } from "@/helpers/games";
+import { getGameImage, getGameUrl } from "@/helpers/games";
+import { Games } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
 type ScrollableGameListType = {
-  games: any[];
+  games: Games[];
   width?: number;
   height?: number;
+};
+
+type HeroType = {
+  games: Games[];
 };
 
 export const ScrollableGameList = ({
@@ -17,7 +22,7 @@ export const ScrollableGameList = ({
     <>
       {games.map((game) => (
         <Link
-          href={`/games/${game.slug}`}
+          href={getGameUrl(game.slug)}
           key={game.id}
           className="h-32 w-auto"
         >
@@ -34,7 +39,7 @@ export const ScrollableGameList = ({
   );
 };
 
-const Hero = ({ games }: { games: any[] }) => {
+const Hero = ({ games }: HeroType) => {
   const style = {
     "--duration": "180s",
     "--item-size": "128px",

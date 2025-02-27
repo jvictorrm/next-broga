@@ -1,8 +1,8 @@
 import cn from "@/helpers/cn";
 
 export type TextInputProps = React.ComponentProps<"input"> & {
-  label?: string | null | undefined;
-  error?: string | null | undefined;
+  label?: string | null;
+  error?: string | null;
 };
 
 const TextInput = ({ label, error, className, ...props }: TextInputProps) => {
@@ -19,7 +19,7 @@ const TextInput = ({ label, error, className, ...props }: TextInputProps) => {
         {...props}
       />
       {error && (
-        <div className="my-2">
+        <div>
           <small className="text-sm text-red-500">{error}</small>
         </div>
       )}

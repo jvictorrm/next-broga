@@ -4,3 +4,7 @@ const BASE_GAME_IMAGE_URL =
 export const getGameImage = (image: string) => {
   return `${BASE_GAME_IMAGE_URL}${image}`;
 };
+
+export const getGameUrl = (slug: string) => {
+  return `/games/${slug}`;
+};

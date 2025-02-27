@@ -1,7 +1,7 @@
 import cn from "@/helpers/cn";
 
 export type SubmitButtonProps = React.ComponentProps<"button"> & {
-  label?: string | null | undefined;
+  label?: string | null;
 };
 
 const SubmitButton = ({
