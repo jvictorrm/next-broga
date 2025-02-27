@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { cookies } from "next/headers";
 import { decrypt, encrypt } from "./jwt";
 
@@ -16,7 +17,7 @@ export const getSession = async () => {
 
   if (!session) return null;
 
-  return await decrypt(session);
+  return (await decrypt(session)) as Pick<User, "uuid" | "name" | "email">;
 };
 
 export const updateSession = async () => {

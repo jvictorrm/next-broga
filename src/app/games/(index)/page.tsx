@@ -1,5 +1,5 @@
 import Pagination from "@/components/Pagination/Pagination";
-import { getGameImage } from "@/helpers/games";
+import { getGameImage, getGameUrl } from "@/helpers/games";
 import GamesService from "@/services/Games";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +25,7 @@ const Games = async ({
           {games.data.map((game) => {
             return (
               <Link
-                href={`/games/${game.slug}`}
+                href={getGameUrl(game.slug)}
                 key={game.id}
                 className="flex-center flex-col relative overflow-hidden transition duration-500 hover:scale-105 cursor-pointer"
               >

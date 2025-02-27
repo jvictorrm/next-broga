@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero/Hero";
 import Pagination from "@/components/Pagination/Pagination";
+import { getArticleUrl } from "@/helpers/articles";
 import HomeLatestArticles from "@/sections/HomeLatestArticles";
 import HomeLatestArticlesSkeleton from "@/sections/HomeLatestArticlesSkeleton";
 import ArticleService from "@/services/Articles";
@@ -46,7 +47,7 @@ export default async function Home({
                   <div>
                     <Image
                       className="h-full w-full object-cover"
-                      src={`/assets/images/articles/${article.image}`}
+                      src={getArticleUrl(article.image)}
                       alt={article.title}
                       width={350}
                       height={200}
@@ -67,7 +68,7 @@ export default async function Home({
                     </p>
                     <p className="flex-grow">{article.excerpt}</p>
                     <Link
-                      href={`/articles/${article.slug}`}
+                      href={getArticleUrl(article.slug)}
                       className="bg-slate-700 hover:bg-indigo-400/40 rounded-lg px-4 py-2 inline max-w-max"
                     >
                       Ler mais
